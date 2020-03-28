@@ -123,7 +123,7 @@
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Instalar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-install">Instalar</a>
         </div>
     </div>
     <!-- Modal Trigger -->
@@ -131,6 +131,21 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+        var btnOpenToInstall;
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var options = {};
+            var sideNav = M.Sidenav.init(elems, options);
+
+            var elems = document.querySelectorAll('.modal');
+            var options = {};
+            var modal = M.Modal.init(elems, options);
+
+            btnOpenToInstall = document.querySelectorAll('#openToInstall')[0];
+        });
+    </script>
 
     <script>
         if (navigator.serviceWorker != null) {
@@ -141,21 +156,29 @@
         }
 
         // fetch('./data.json')
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.sidenav');
-            var options = {};
-            var sideNav = M.Sidenav.init(elems, options);
+        let deferredPrompt;
+        const btnInstall = document.querySelector('.btn-install');
 
-            var elems = document.querySelectorAll('.modal');
-            var options = {};
-            var modal = M.Modal.init(elems, options);
-
-            var btnOpenToInstall = document.querySelectorAll('#openToInstall')[0];
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
             btnOpenToInstall.click();
+
+            btnInstall.addEventListener('click', (e) => {
+                // maybe the click need to be here!
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
         });
+
     </script>
 </body>
 

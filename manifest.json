@@ -3,6 +3,7 @@
   "short_name": "PWA Template",
   "display": "standalone",
   "start_url": "https://ailtonbsj.github.io/pwa-a2hs-template/",
+  "start_url_bkp": "/",
   "theme_color": "#313131",
   "background_color": "#313131",
   "icons": [
