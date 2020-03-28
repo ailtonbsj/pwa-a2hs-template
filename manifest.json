@@ -1,6 +1,6 @@
 {
   "name": "PWA A2HS Template",
-  "short_name": "pwa_template",
+  "short_name": "PWA Template",
   "display": "standalone",
   "start_url": "https://ailtonbsj.github.io/pwa-a2hs-template/",
   "theme_color": "#313131",
