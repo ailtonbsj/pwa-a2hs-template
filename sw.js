@@ -4,7 +4,7 @@ const appName = 'pwa-a2hs-template';
 var cacheList = [
   '/',
   "index.html",
-  "icons/launch256.png"
+  "icons/launch512.png"
 ]
 
 var cacheStorageKey = `${appName}-${version}`;
